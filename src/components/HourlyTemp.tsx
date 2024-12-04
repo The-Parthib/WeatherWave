@@ -1,6 +1,8 @@
 import type { ForecastData } from "@/api/types";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { LineChart } from "lucide-react";
+import { Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
+import { ResponsiveContainer } from "recharts";
+import { format } from "date-fns";
 
 interface HourlyProps{
     data : ForecastData;
@@ -8,28 +10,38 @@ interface HourlyProps{
 
 
 const HourlyTemp = ({ data }: HourlyProps) => {
+
+const chartData = data.list
+    .slice(0, 8) // Get next 24 hours (3-hour intervals)
+    .map((item) => ({
+      time: format(new Date(item.dt * 1000), "ha"),
+      temp: Math.round(item.main.temp),
+      feels_like: Math.round(item.main.feels_like),
+    }));
+
   return (
      <Card className="flex-1">
       <CardHeader>
         <CardTitle>Today's Temperature</CardTitle>
       </CardHeader>
+
       <CardContent>
         <div className="h-[200px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width={"100%"} height={"100%"}>
             <LineChart data={chartData}>
               <XAxis
                 dataKey="time"
                 stroke="#888888"
                 fontSize={12}
-                tickLine={false}
-                axisLine={false}
+                tickLine={true}
+                axisLine={true}
               />
               <YAxis
                 stroke="#888888"
                 fontSize={12}
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={(value) => `${value}°`}
+                tickLine={true}
+                axisLine={true}
+                tickFormatter={(value) => `${value}°C`}
               />
               <Tooltip
                 content={({ active, payload }) => {
@@ -80,6 +92,6 @@ const HourlyTemp = ({ data }: HourlyProps) => {
         </div>
       </CardContent>
     </Card>
-};
+)};
 
 export default HourlyTemp;

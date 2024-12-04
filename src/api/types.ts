@@ -3,7 +3,7 @@ export interface Coordinates {
   lon: number;
 }
 
-export interface GeocodingResponse {
+export interface GeoCodingResponse {
   name: string;
   local_names?: Record<string, string>;
   lat: number;

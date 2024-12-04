@@ -10,6 +10,8 @@ import {
 } from "@/hooks/useWeather";
 import { CurrentWeather } from "../CurrentWeather";
 import HourlyTemp from "../HourlyTemp";
+import WeatherDetails from "../ui/WeatherDetails";
+import WeatherForecast from "../ui/WeatherForecast";
 
 const WeatherDashboard = () => {
   const {
@@ -67,7 +69,7 @@ const WeatherDashboard = () => {
     );
   }
 
-  if (!coordinates || (!weatherQuery.data && !forecastQuery.data)) {
+  if (!weatherQuery.data || !forecastQuery.data) {
     return <SkeletonLoading />;
   }
 
@@ -91,12 +93,17 @@ const WeatherDashboard = () => {
         </Button>
       </div>
       <div className="grid gap-6">
-        <CurrentWeather
-          data={weatherQuery.data}
-          locationName={locationQuery.data?.[0]}
-        />
-
-        <HourlyTemp data={forecastQuery.data}/>
+        <div className="flex flex-col lg:flex-row gap-4">
+          <CurrentWeather
+            data={weatherQuery.data}
+            locationName={locationQuery.data?.[0]}
+          />
+          <HourlyTemp data={forecastQuery.data} />
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 items-start">
+          <WeatherDetails data={weatherQuery.data} />
+          <WeatherForecast data={forecastQuery.data} />
+        </div>
       </div>
     </div>
   );

@@ -1,21 +1,21 @@
 import { Card, CardContent } from "./ui/card";
 import { ArrowDown, ArrowUp, Droplets, Wind } from "lucide-react";
-import type { WeatherData, GeocodingResponse } from "@/api/types";
+import type { WeatherData, GeoCodingResponse } from "@/api/types";
 
 interface CurrentWeatherProps {
   data: WeatherData;
-  locationName?: GeocodingResponse;
+  locationName?: GeoCodingResponse;
 }
 
-export function CurrentWeather({ data, locationName }:CurrentWeatherProps) {
+export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   const {
     weather: [currentWeather],
     main: { temp, feels_like, temp_min, temp_max, humidity },
     wind: { speed },
   } = data;
-// console.log(currentWeather.icon);
+  // console.log(currentWeather.icon);
   // Format temperature
-  const formatTemp = (temp: number) => `${Math.round(temp)}°`;
+  const formatTemp = (temp: number) => `${Math.round(temp)}°C`;
 
   return (
     <Card className="overflow-hidden">
@@ -25,11 +25,11 @@ export function CurrentWeather({ data, locationName }:CurrentWeatherProps) {
             <div className="space-y-2">
               <div className="flex items-center">
                 <h2 className="text-2xl font-bold tracking-tight">
-                  {locationName?.name } 
+                  {`${locationName?.name} ,`}
                 </h2>
                 {locationName?.state && (
                   <span className="text-muted-foreground">
-                    {" - "} {locationName.state}
+                    {` ${locationName.state}`}
                   </span>
                 )}
               </div>

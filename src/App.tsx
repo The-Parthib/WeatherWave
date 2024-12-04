@@ -3,9 +3,10 @@ import "./App.css";
 import Layout from "./components/Layout";
 import { ThemeProvider } from "./components/context/theme-provider";
 import WeatherDashboard from "./components/pages/weather-dashboard";
-import CityPage from "./components/pages/city-page";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { CityPage } from "./components/pages/city-page";
 
 const queryClient = new QueryClient({
   defaultOptions:{
