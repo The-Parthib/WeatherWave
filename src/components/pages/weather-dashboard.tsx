@@ -53,21 +53,21 @@ const WeatherDashboard = () => {
     );
   }
 
-  if (weatherQuery.error || forecastQuery.error) {
-    return (
-      <Alert variant="destructive">
-        <AlertTriangle className="h-4 w-4" />
-        <AlertTitle>Weather Error</AlertTitle>
-        <AlertDescription className="space-y-2">
-          <p>Failed to fetch data. Please try again.</p>
-          <Button onClick={handleRefresh} variant="outline" className="w-fit">
-            <RefreshCw className="mr-2 h-4 w-4" />
-            Retry
-          </Button>
-        </AlertDescription>
-      </Alert>
-    );
-  }
+  // if (weatherQuery.error || forecastQuery.error) {
+  //   return (
+  //     <Alert variant="destructive">
+  //       <AlertTriangle className="h-4 w-4" />
+  //       <AlertTitle>Weather Error</AlertTitle>
+  //       <AlertDescription className="space-y-2">
+  //         <p>Failed to fetch data. Please try again.</p>
+  //         <Button onClick={handleRefresh} variant="outline" className="w-fit">
+  //           <RefreshCw className="mr-2 h-4 w-4" />
+  //           Retry
+  //         </Button>
+  //       </AlertDescription>
+  //     </Alert>
+  //   );
+  // }
 
   if (!weatherQuery.data || !forecastQuery.data) {
     return <SkeletonLoading />;
